@@ -29,6 +29,7 @@ router.post('/login', function(req,res){
     if ( req.body.username && req.body.password ) {
         auth.authenticate(req.body.username, req.body.password,function(err, user){
             if (err) {
+                console.warn(err.dn, err.code, err.name, err.message);
                 res.render(__dirname + '/login', { title: 'Login', message: 'Wrong password or username!' });
             } else {
                 req.session.user = user;
