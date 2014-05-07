@@ -1,0 +1,22 @@
+doctype html
+html
+    head
+        title= title
+
+        script(src='/bower_components/jquery/dist/jquery.min.js')
+        script(src='/bower_components/bootstrap/dist/js/bootstrap.min.js')
+        link(rel='stylesheet', href='/bower_components/bootstrap/dist/css/bootstrap.min.css')
+    body
+        h1= title
+
+        if message
+            .alert.alert-danger= message
+
+        form(action='?',method='post')
+            .form-group
+                label(for='username') Username
+                input.form-control(type='text',name='username',placeholder='e.g. hmuster')
+            .form-group
+                label(for='username') Password
+                input.form-control(type='password',name='password',placeholder='123456')
+            button.btn.btn-default(type='submit') Submit
