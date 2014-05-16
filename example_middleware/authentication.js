@@ -25,6 +25,11 @@ router.get('/login', function(req, res) {
     res.render('login', { title: 'Login' });
 });
 
+router.get('/logout', function(req, res){
+    req.session.destroy();
+    res.redirect('/');
+});
+
 router.post('/login', function(req,res){
     if ( req.body.username && req.body.password ) {
         auth.authenticate(req.body.username, req.body.password,function(err, user){
@@ -41,7 +46,7 @@ router.post('/login', function(req,res){
     }
 });
 
-router.get('/', function(req, res, next) {
+router.all('*', function(req, res, next) {
     if(req.session.user) {
         // user is logged in
         next();
