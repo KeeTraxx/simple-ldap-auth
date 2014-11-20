@@ -16,7 +16,7 @@ app.use(bodyParser.urlencoded());
 app.use(cookieParser());
 var SimpleLdapAuth = require('../');
 
-/*app.use('/', SimpleLdapAuth({
+app.use('/', SimpleLdapAuth({
     server: {
         url: 'ldap://activedirectory.contoso.com:389',
         domain: 'CONTOSO',
@@ -26,21 +26,7 @@ var SimpleLdapAuth = require('../');
         searchFilter: '(&(objectcategory=person)(objectclass=user)(|(samaccountname={{username}})(mail={{username}})))',
         searchAttributes: ['displayName', 'mail', 'sAMAccountName', 'uid']
     }
-}));*/
-
-app.use('/', SimpleLdapAuth({
-    server: {
-        url: '***REMOVED***',
-        domain: '***REMOVED***',
-        adminDn: '***REMOVED***',
-        adminPassword: '***REMOVED***',
-        searchBase: '***REMOVED***',
-        searchFilter: '(&(objectcategory=person)(objectclass=user)(|(samaccountname={{username}})(mail={{username}})))',
-        searchAttributes: ['displayName', 'mail', 'sAMAccountName', 'uid'],
-        groupSearchBase: 'OU=OU Hosting,DC=campus,DC=unibe,DC=ch'
-    }
 }));
-
 
 app.get('/', function (req, res) {
     res.send(req.session.user);

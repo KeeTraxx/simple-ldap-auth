@@ -5,11 +5,11 @@ var SimpleLdapAuth = require(__dirname + '../lib/SimpleLdapAuth');
 
 var options = {
     server: {
-        url: '***REMOVED***',
-        domain: '***REMOVED***',
-        adminDn: '***REMOVED***',
-        adminPassword: '***REMOVED***',
-        searchBase: '***REMOVED***',
+        url: 'ldap://ldap.campus.unibe.ch:389',
+        domain: 'CAMPUS',
+        adminDn: 'CN=IWI-inventory,OU=Services,OU=IWI,OU=OU Hosting,DC=campus,DC=unibe,DC=ch',
+        adminPassword: 'bwDG6m7xaeOY6Xw-sLS_',
+        searchBase: 'OU=Employees,OU=PARIS,DC=campus,DC=unibe,DC=ch',
         searchFilter: '(&(objectcategory=person)(objectclass=user)(|(samaccountname={{username}})(mail={{username}})))',
         searchAttributes: ['displayName', 'mail', 'sAMAccountName', 'uid']
     }
