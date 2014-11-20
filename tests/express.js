@@ -29,7 +29,7 @@ app.use('/', SimpleLdapAuth({
 }));
 
 app.get('/', function (req, res) {
-    res.send('ok');
+    res.send(req.session.user);
 });
 
 

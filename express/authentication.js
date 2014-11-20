@@ -71,6 +71,8 @@ function getRouter(options) {
         }
     });
 
+    router.search = SimpleLdapAuth.search;
+
     return router;
 }
 
