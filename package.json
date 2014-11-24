@@ -1,7 +1,7 @@
 {
   "name": "simple-ldap-auth",
   "description": "Very LIGHTWEIGHT LDAP/AD Authentication (compiles on Windows)",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "main": "express/authentication",
   "author": "Khôi Tran <kt@compile.ch> (http://www.tran-engineering.ch)",
   "scripts": {

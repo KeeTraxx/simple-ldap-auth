@@ -46,7 +46,7 @@ function getRouter(options) {
                     res.render(__dirname + '/login', { title: 'Login', message: 'Wrong password or username!' });
                 } else {
                     req.session.user = user;
-                    res.redirect(req.session.redirectUrl || '/');
+                    res.redirect(req.session.redirectUrl + (req.body.redirectHash || '' ) || '/');
                 }
             });
         } else {
