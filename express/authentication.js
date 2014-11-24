@@ -54,7 +54,15 @@ function getRouter(options) {
         }
     });
 
+    var auth = new SimpleLdapAuth(configuration,function(err, auth){
+        if ( err ) {
+            console.warn(err.code,err.name,err.message);
+        }
+    });
+
+
     router.all('*', function(req, res, next) {
+        req.ldap = auth;
         if(req.session.user) {
             // user is logged in
             next();
@@ -63,15 +71,6 @@ function getRouter(options) {
             res.redirect('/login');
         }
     });
-
-
-    var auth = new SimpleLdapAuth(configuration,function(err, auth){
-        if ( err ) {
-            console.warn(err.code,err.name,err.message);
-        }
-    });
-
-    router.search = SimpleLdapAuth.search;
 
     return router;
 }
