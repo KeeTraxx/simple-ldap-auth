@@ -16,19 +16,29 @@ app.use(bodyParser.urlencoded());
 app.use(cookieParser());
 var SimpleLdapAuth = require('../');
 
-app.use('/', SimpleLdapAuth({
+var auth = SimpleLdapAuth({
     server: {
-        url: 'ldap://activedirectory.contoso.com:389',
-        domain: 'CONTOSO',
-        adminDn: 'CN=Administrator,DC=corp,DC=contoso,DC=com',
-        adminPassword: 'somepassword',
-        searchBase: 'OU=Users,DC=corp,DC=contoso,DC=com',
+        url: 'ldap://ldap.campus.unibe.ch:389',
+        domain: 'CAMPUS',
+        adminDn: 'CN=IWI-inventory,OU=Services,OU=IWI,OU=OU Hosting,DC=campus,DC=unibe,DC=ch',
+        adminPassword: 'bwDG6m7xaeOY6Xw-sLS_',
+        searchBase: 'OU=Employees,OU=PARIS,DC=campus,DC=unibe,DC=ch',
         searchFilter: '(&(objectcategory=person)(objectclass=user)(|(samaccountname={{username}})(mail={{username}})))',
-        searchAttributes: ['displayName', 'mail', 'sAMAccountName', 'uid']
+        searchAttributes: ['displayName', 'mail', 'sAMAccountName', 'uid'],
+        groupSearchBase: 'OU=OU Hosting,DC=campus,DC=unibe,DC=ch'
     }
-}));
+});
+
+app.use('/', auth);
 
 app.get('/', function (req, res) {
+    console.log(req.host, req.hostname, req.port)
+    req.ldap.search('DC=campus,DC=unibe,DC=ch', {
+        scope: 'sub',
+        filter: '(&(objectclass=group)(|(cn=IWI-hilfsassistenten-im)(cn=IWI-hilfsassistenten-ie)(cn=IWI-assistenten)))'
+    }, function(err, result){
+        console.log(result);
+    });
     res.send(req.session.user);
 });
 

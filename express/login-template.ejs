@@ -14,7 +14,13 @@
 <div class="container">
     <div class="center-block">
         <h1>Login</h1>
-
+        <% if (typeof(msg) !== 'undefined') { %>
+        <div class="alert alert-danger" role="alert">
+            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+            <span class="sr-only">Error:</span>
+            Wrong username or password!
+        </div>
+        <% } %>
         <form action="?" method="post">
             <div class="form-group"><label for="username">Username</label><input id="username" type="text" name="username"
                                                                                  placeholder="e.g. hmuster"

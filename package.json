@@ -1,7 +1,7 @@
 {
   "name": "simple-ldap-auth",
   "description": "Very LIGHTWEIGHT LDAP/AD Authentication (compiles on Windows)",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "main": "express/authentication",
   "author": "Khôi Tran <kt@compile.ch> (http://www.tran-engineering.ch)",
   "scripts": {
@@ -10,14 +10,15 @@
   "dependencies": {
     "underscore": "^1.6.0",
     "ldapjs": "^0.7.1",
-    "async": "~0.9.0"
+    "async": "~0.9.0",
+    "express": "~4.10.2",
+    "ejs": "~1.0.0"
   },
   "repository": {
     "type": "git",
     "url": "http://github.com/KeeTraxx/simple-ldap-auth"
   },
   "devDependencies": {
-    "express": "~4.10.2",
     "cookie-parser": "~1.3.3",
     "body-parser": "~1.9.2",
     "express-session": "~1.9.1",

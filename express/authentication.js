@@ -7,6 +7,8 @@ In app.js add the following lines:
 var express = require('express');
 var _ = require('underscore');
 
+var ejs = require('ejs');
+
 var SimpleLdapAuth = require(__dirname + '/../lib/SimpleLdapAuth');
 
 var defaults = {
@@ -23,14 +25,14 @@ var defaults = {
     }
 };
 
-
-
 function getRouter(options) {
     var router = express.Router();
     var configuration = _.extend(defaults, options);
 
     router.get('/login', function(req, res) {
-        res.sendfile('login-template.html', {root: __dirname });
+        ejs.renderFile(__dirname + '/login-template.ejs', {}, function(err, html){
+            res.send(html);
+        });
     });
 
     router.get('/logout', function(req, res){
@@ -43,14 +45,18 @@ function getRouter(options) {
             auth.authenticate(req.body.username, req.body.password,function(err, user){
                 if (err) {
                     console.warn(err.dn, err.code, err.name, err.message);
-                    res.render(__dirname + '/login', { title: 'Login', message: 'Wrong password or username!' });
+                    ejs.renderFile(__dirname + '/login-template.ejs', {msg: 'Wrong username or password!'}, function(err, html){
+                        res.send(html);
+                    });
                 } else {
                     req.session.user = user;
                     res.redirect(req.session.redirectUrl + (req.body.redirectHash || '' ) || '/');
                 }
             });
         } else {
-            res.sendfile('login-template.html', {root: __dirname });
+            ejs.renderFile(__dirname + '/login-template.ejs', {msg: 'Wrong username or password!'}, function(err, html){
+                res.send(html);
+            });
         }
     });
 
